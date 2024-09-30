@@ -3,10 +3,17 @@ extends Node2D
 @onready var player: CharacterBody2D = %player
 @onready var sprite: AnimatedSprite2D = %player/AnimatedSprite2D
 
+@onready var slime: CharacterBody2D = %slime
+@onready var sprite_slime: AnimatedSprite2D = $slime/AnimatedSprite2D
+
+
 const SPEED = 300 # px per second
 
 var direction: Vector2
 var anim_direction: String = "down"
+
+var direction_slime: Vector2 = Vector2.ZERO
+var anim_direction_slime: String = "down"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -16,7 +23,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_dt: float) -> void:
-	# movement
+	# movements player
 	var ix = Input.get_axis("player_left", "player_right")
 	var iy = Input.get_axis("player_up", "player_down")
 	var iv = Vector2(ix, iy).normalized()
@@ -40,3 +47,28 @@ func _physics_process(_dt: float) -> void:
 	var animation_name = base_anim + anim_direction
 	sprite.play(animation_name)
 	sprite.flip_h = flip_x
+	
+	# movements slime
+	
+	
+	if slime.isSeeingPlayer():
+		direction_slime = Vector2(player.position.x - slime.position.x,player.position.y - slime.position.y).normalized()
+		slime.velocity = direction_slime * SPEED/2
+		slime.move_and_slide()
+	
+	# animation
+	var base_anim_slime = "idle_" if direction_slime.length() < .1 else "move_"
+	var flip_x_slime = false
+	if direction_slime.y > 0:
+		anim_direction_slime = "down"
+	elif direction_slime.y < 0:
+		anim_direction_slime = "up"
+	elif direction_slime.x < 0:
+		anim_direction_slime = "right"
+		flip_x_slime = true
+	elif direction_slime.x > 0:
+		anim_direction_slime = "right"
+	
+	var animation_name_slime = base_anim_slime + anim_direction_slime
+	sprite_slime.play(animation_name_slime)
+	sprite_slime.flip_h = flip_x_slime
