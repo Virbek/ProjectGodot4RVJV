@@ -50,23 +50,23 @@ func _physics_process(_dt: float) -> void:
 	
 	# movements slime
 	
-	
+	var iv_slime = Vector2(player.position.x - slime.position.x,player.position.y - slime.position.y).normalized()
 	if slime.isSeeingPlayer():
-		direction_slime = Vector2(player.position.x - slime.position.x,player.position.y - slime.position.y).normalized()
-		slime.velocity = direction_slime * SPEED/2
+		direction_slime = iv_slime
+		slime.velocity = iv_slime * SPEED/2
 		slime.move_and_slide()
-	
+		
 	# animation
-	var base_anim_slime = "idle_" if direction_slime.length() < .1 else "move_"
+	var base_anim_slime = "idle_" if !slime.isSeeingPlayer() else "move_"
 	var flip_x_slime = false
-	if direction_slime.y > 0:
+	if direction_slime.y > 0.7:
 		anim_direction_slime = "down"
-	elif direction_slime.y < 0:
+	elif direction_slime.y < -0.7:
 		anim_direction_slime = "up"
-	elif direction_slime.x < 0:
+	elif direction_slime.x < -0.7:
 		anim_direction_slime = "right"
 		flip_x_slime = true
-	elif direction_slime.x > 0:
+	elif direction_slime.x > 0.7:
 		anim_direction_slime = "right"
 	
 	var animation_name_slime = base_anim_slime + anim_direction_slime

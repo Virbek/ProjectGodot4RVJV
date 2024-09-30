@@ -618,8 +618,8 @@ script = ExtResource("4_fdmb7")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="slime"]
 sprite_frames = SubResource("SpriteFrames_v6kc6")
-animation = &"move_up"
-frame_progress = 0.0633008
+animation = &"idle_down"
+frame_progress = 0.150633
 speed_scale = 1.5
 
 [node name="VueDuSlime" type="CollisionShape2D" parent="slime"]
