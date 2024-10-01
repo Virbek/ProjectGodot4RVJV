@@ -5,6 +5,7 @@ extends Node2D
 
 @onready var slime: CharacterBody2D = %slime
 @onready var sprite_slime: AnimatedSprite2D = $slime/AnimatedSprite2D
+@onready var poteau: StaticBody2D = $poteau
 
 
 const SPEED = 300 # px per second
@@ -19,10 +20,16 @@ var anim_direction_slime: String = "down"
 func _ready() -> void:
 	#EventBus.level_started.emit()
 	#EventBus.level_started.connect(func(): pass)
+	var rng = RandomNumberGenerator.new()
+	var rndX = rng.randi_range(0, 1000)
+	var rndY = rng.randi_range(0, 1000)
+	poteau.position = Vector2(rndX, rndY)
+	poteau.visible = true;
 	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_dt: float) -> void:
+	
 	# movements player
 	var ix = Input.get_axis("player_left", "player_right")
 	var iy = Input.get_axis("player_up", "player_down")
@@ -72,6 +79,19 @@ func _physics_process(_dt: float) -> void:
 		elif direction_slime.x > 0.7:
 			anim_direction_slime = "right"
 		
+	# animation
+	var base_anim_slime = "idle_" if !slime.isSeeingPlayer() else "move_"
+	var flip_x_slime = false
+	if direction_slime.y > 0.7:
+		anim_direction_slime = "down"
+	elif direction_slime.y < -0.7:
+		anim_direction_slime = "up"
+	elif direction_slime.x < -0.7:
+		anim_direction_slime = "right"
+		flip_x_slime = true
+	elif direction_slime.x > 0.7:
+		anim_direction_slime = "right"
+	
 		var animation_name_slime = base_anim_slime + anim_direction_slime
 		if(!slime.isExplosing):
 			sprite_slime.play(animation_name_slime)

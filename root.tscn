@@ -1,4 +1,6 @@
+
 [gd_scene load_steps=94 format=3 uid="uid://dhk160xc837ki"]
+
 
 [ext_resource type="Texture2D" uid="uid://draivv5jqmk0r" path="res://assets/mystic_woods_free_2.2/sprites/characters/player.png" id="1_84f7y"]
 [ext_resource type="Script" path="res://root.gd" id="1_ulil3"]
@@ -7,8 +9,12 @@
 [ext_resource type="Texture2D" uid="uid://b1spsq2veqrk4" path="res://assets/mystic_woods_free_2.2/sprites/objects/objects.png" id="3_sijcb"]
 [ext_resource type="Texture2D" uid="uid://d2vnafkuhy1ny" path="res://assets/mystic_woods_free_2.2/sprites/characters/slime.png" id="4_ex1rb"]
 [ext_resource type="Script" path="res://slime.gd" id="4_fdmb7"]
+
+[ext_resource type="Texture2D" uid="uid://jy7a52a54quy" path="res://assets/kenney_1-bit-pack/Tilesheet/colored-transparent_packed.png" id="5_5l8jf"]
+[ext_resource type="Texture2D" uid="uid://5hgl674r3f2q" path="res://assets/kenney_1-bit-pack/Tilesheet/colored.png" id="7_7jat1"]
 [ext_resource type="Texture2D" uid="uid://7ltrsk7aqbpg" path="res://assets/explosion_slime.png" id="5_r7a5m"]
 [ext_resource type="AudioStream" uid="uid://y4wyqgpr5vq2" path="res://assets/sounds/explosion.wav" id="9_o1dfh"]
+
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ujpuv"]
 size = Vector2(9.25, 3)
@@ -634,25 +640,56 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_dabip"]
 radius = 82.2515
 
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6gsh8"]
+size = Vector2(249.868, 48)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7vijy"]
+size = Vector2(59, 385.75)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_haovu"]
+atlas = ExtResource("5_5l8jf")
+region = Rect2(65, 240, 13, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fvdjt"]
+atlas = ExtResource("5_5l8jf")
+region = Rect2(65, 240, 13, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xya6r"]
+atlas = ExtResource("5_5l8jf")
+region = Rect2(65, 240, 13, 15)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7173m"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_haovu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fvdjt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xya6r")
+}],
+"loop": false,
+"name": &"Spawn poteau",
+"speed": 5.0
+}]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ulble"]
 size = Vector2(16, 5)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_f6urc"]
 radius = 32.1908
 
+
 [node name="root" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_ulil3")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_left = 20.0
-offset_top = 8.0
-offset_right = 1136.0
-offset_bottom = 448.0
-color = Color(0.25361, 0.775285, 0.585926, 1)
-
 [node name="player" type="CharacterBody2D" parent="."]
 unique_name_in_owner = true
+z_index = 2
 position = Vector2(248.925, 246)
 scale = Vector2(4, 4)
 collision_mask = 2
@@ -692,6 +729,7 @@ region_rect = Rect2(0, 16, 16, 16)
 
 [node name="slime" type="CharacterBody2D" parent="."]
 unique_name_in_owner = true
+z_index = 2
 position = Vector2(775, 258)
 scale = Vector2(4, 4)
 collision_mask = 3
@@ -706,6 +744,122 @@ speed_scale = 1.5
 [node name="VueDuSlime" type="CollisionShape2D" parent="slime"]
 shape = SubResource("CircleShape2D_dabip")
 disabled = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+light_mask = 2
+visibility_layer = 2
+offset_left = 23.0
+offset_top = 81.0
+offset_right = 1139.0
+offset_bottom = 521.0
+color = Color(0.25361, 0.775285, 0.585926, 1)
+
+[node name="poteau" type="StaticBody2D" parent="."]
+visible = false
+position = Vector2(305, 456)
+
+[node name="laser" type="StaticBody2D" parent="poteau"]
+visible = false
+z_index = 1
+position = Vector2(-1396, -244)
+collision_layer = 0
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="poteau/laser"]
+z_index = 1
+position = Vector2(1398, 217)
+scale = Vector2(9.41052, -8.05809)
+texture = ExtResource("5_5l8jf")
+region_enabled = true
+region_rect = Rect2(399.943, 191.827, 16.3508, 16.3508)
+
+[node name="Sprite2D2" type="Sprite2D" parent="poteau/laser"]
+position = Vector2(1400, 320)
+scale = Vector2(9.52, 5.4)
+texture = ExtResource("5_5l8jf")
+region_enabled = true
+region_rect = Rect2(400.339, 207.896, 15.8603, 15.5333)
+
+[node name="Sprite2D3" type="Sprite2D" parent="poteau/laser"]
+position = Vector2(1399, 112)
+scale = Vector2(9.52, 5.4)
+texture = ExtResource("5_5l8jf")
+region_enabled = true
+region_rect = Rect2(400.339, 207.896, 15.8603, 15.5333)
+
+[node name="Sprite2D4" type="Sprite2D" parent="poteau/laser"]
+position = Vector2(1516, 219)
+rotation = 1.5708
+scale = Vector2(8, 5.4)
+texture = ExtResource("5_5l8jf")
+region_enabled = true
+region_rect = Rect2(400.339, 207.896, 15.8603, 15.5333)
+
+[node name="Sprite2D5" type="Sprite2D" parent="poteau/laser"]
+position = Vector2(1280, 219)
+rotation = 1.5708
+scale = Vector2(8, 5.4)
+texture = ExtResource("5_5l8jf")
+region_enabled = true
+region_rect = Rect2(400.339, 207.896, 15.8603, 15.5333)
+
+[node name="Sprite2D6" type="Sprite2D" parent="poteau/laser"]
+position = Vector2(1393, 30)
+rotation = -3.14159
+scale = Vector2(9.52, 5.4)
+texture = ExtResource("5_5l8jf")
+region_enabled = true
+region_rect = Rect2(416.519, 207.842, 15.6477, 15.288)
+
+[node name="Sprite2D7" type="Sprite2D" parent="poteau/laser"]
+position = Vector2(1598, 214)
+rotation = -1.5708
+scale = Vector2(8.00001, 5.4)
+texture = ExtResource("5_5l8jf")
+region_enabled = true
+region_rect = Rect2(416.519, 207.842, 15.6477, 15.288)
+
+[node name="Sprite2D8" type="Sprite2D" parent="poteau/laser"]
+position = Vector2(1400, 399)
+scale = Vector2(9.52, 5.4)
+texture = ExtResource("5_5l8jf")
+region_enabled = true
+region_rect = Rect2(416.519, 207.842, 15.6477, 15.288)
+
+[node name="Sprite2D9" type="Sprite2D" parent="poteau/laser"]
+position = Vector2(1198, 220)
+rotation = 1.5708
+scale = Vector2(8.00001, 5.4)
+texture = ExtResource("5_5l8jf")
+region_enabled = true
+region_rect = Rect2(416.519, 207.842, 15.6477, 15.288)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="poteau/laser"]
+position = Vector2(1398, 217)
+scale = Vector2(1.67288, 1)
+shape = SubResource("RectangleShape2D_6gsh8")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="poteau/laser"]
+position = Vector2(1397.5, 214.125)
+shape = SubResource("RectangleShape2D_7vijy")
+
+[node name="Sprite2D" type="Sprite2D" parent="poteau"]
+z_index = 2
+position = Vector2(-4.00003, -6)
+scale = Vector2(5.41056, 3.01052)
+texture = ExtResource("7_7jat1")
+region_enabled = true
+region_rect = Rect2(699.394, 223.028, 11.0913, 11.8139)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="poteau"]
+visible = false
+z_index = 2
+position = Vector2(-4.99997, -30)
+scale = Vector2(4.94799, 4.58023)
+sprite_frames = SubResource("SpriteFrames_7173m")
+animation = &"Spawn poteau"
+frame = 2
+frame_progress = 1.0
 
 [node name="shape_body" type="CollisionShape2D" parent="slime"]
 position = Vector2(-0.25, 5.5)
