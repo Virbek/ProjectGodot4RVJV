@@ -1,4 +1,4 @@
-[gd_scene load_steps=93 format=3 uid="uid://dhk160xc837ki"]
+[gd_scene load_steps=94 format=3 uid="uid://dhk160xc837ki"]
 
 [ext_resource type="Texture2D" uid="uid://draivv5jqmk0r" path="res://assets/mystic_woods_free_2.2/sprites/characters/player.png" id="1_84f7y"]
 [ext_resource type="Script" path="res://root.gd" id="1_ulil3"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://d2vnafkuhy1ny" path="res://assets/mystic_woods_free_2.2/sprites/characters/slime.png" id="4_ex1rb"]
 [ext_resource type="Script" path="res://slime.gd" id="4_fdmb7"]
 [ext_resource type="Texture2D" uid="uid://7ltrsk7aqbpg" path="res://assets/explosion_slime.png" id="5_r7a5m"]
+[ext_resource type="AudioStream" uid="uid://y4wyqgpr5vq2" path="res://assets/sounds/explosion.wav" id="9_o1dfh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ujpuv"]
 size = Vector2(9.25, 3)
@@ -713,3 +714,6 @@ shape = SubResource("RectangleShape2D_ulble")
 [node name="ExploseRange" type="CollisionShape2D" parent="slime"]
 shape = SubResource("CircleShape2D_f6urc")
 disabled = true
+
+[node name="explosion_sound" type="AudioStreamPlayer2D" parent="slime"]
+stream = ExtResource("9_o1dfh")
