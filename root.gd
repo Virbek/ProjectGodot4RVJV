@@ -7,6 +7,7 @@ extends Node2D
 @onready var sprite_slime: AnimatedSprite2D = $slime/AnimatedSprite2D
 
 
+
 const SPEED = 300 # px per second
 
 var direction: Vector2
@@ -19,6 +20,7 @@ var anim_direction_slime: String = "down"
 func _ready() -> void:
 	#EventBus.level_started.emit()
 	#EventBus.level_started.connect(func(): pass)
+
 	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
