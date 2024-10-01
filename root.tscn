@@ -1,4 +1,4 @@
-[gd_scene load_steps=94 format=3 uid="uid://dhk160xc837ki"]
+[gd_scene load_steps=100 format=3 uid="uid://dhk160xc837ki"]
 
 [ext_resource type="Texture2D" uid="uid://draivv5jqmk0r" path="res://assets/mystic_woods_free_2.2/sprites/characters/player.png" id="1_84f7y"]
 [ext_resource type="Script" path="res://root.gd" id="1_ulil3"]
@@ -11,6 +11,8 @@
 [ext_resource type="Script" path="res://trap.gd" id="6_lewpr"]
 [ext_resource type="Texture2D" uid="uid://7ltrsk7aqbpg" path="res://assets/explosion_slime.png" id="5_r7a5m"]
 [ext_resource type="AudioStream" uid="uid://y4wyqgpr5vq2" path="res://assets/sounds/explosion.wav" id="9_o1dfh"]
+[ext_resource type="Script" path="res://skelette.gd" id="10_vlt3l"]
+[ext_resource type="Texture2D" uid="uid://b5vlfpbxirt1v" path="res://assets/skel.png" id="11_bdnh4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ujpuv"]
 size = Vector2(9.25, 3)
@@ -644,6 +646,31 @@ size = Vector2(16, 5)
 [sub_resource type="CircleShape2D" id="CircleShape2D_f6urc"]
 radius = 32.1908
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pxc0d"]
+size = Vector2(10, 6.5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1jj8q"]
+atlas = ExtResource("11_bdnh4")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4l7cb"]
+atlas = ExtResource("11_bdnh4")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1lb7a"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1jj8q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4l7cb")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
 [node name="root" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_ulil3")
@@ -657,9 +684,9 @@ color = Color(0.25361, 0.775285, 0.585926, 1)
 
 [node name="player" type="CharacterBody2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(248.925, 246)
+position = Vector2(249, 246)
 scale = Vector2(4, 4)
-collision_mask = 2
+collision_mask = 6
 script = ExtResource("2_ak8qt")
 
 [node name="Camera2D" type="Camera2D" parent="player"]
@@ -735,3 +762,18 @@ disabled = true
 
 [node name="explosion_sound" type="AudioStreamPlayer2D" parent="slime"]
 stream = ExtResource("9_o1dfh")
+
+[node name="skelette" type="CharacterBody2D" parent="."]
+position = Vector2(664, -60)
+scale = Vector2(4, 4)
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("10_vlt3l")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="skelette"]
+position = Vector2(0, 4.75)
+shape = SubResource("RectangleShape2D_pxc0d")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="skelette"]
+sprite_frames = SubResource("SpriteFrames_1lb7a")
+autoplay = "default"
