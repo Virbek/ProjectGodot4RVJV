@@ -1,12 +1,10 @@
-[gd_scene load_steps=83 format=3 uid="uid://dhk160xc837ki"]
+[gd_scene load_steps=80 format=3 uid="uid://dhk160xc837ki"]
 
 [ext_resource type="Texture2D" uid="uid://draivv5jqmk0r" path="res://assets/mystic_woods_free_2.2/sprites/characters/player.png" id="1_84f7y"]
 [ext_resource type="Script" path="res://root.gd" id="1_ulil3"]
 [ext_resource type="Texture2D" uid="uid://b1spsq2veqrk4" path="res://assets/mystic_woods_free_2.2/sprites/objects/objects.png" id="3_sijcb"]
 [ext_resource type="Texture2D" uid="uid://d2vnafkuhy1ny" path="res://assets/mystic_woods_free_2.2/sprites/characters/slime.png" id="4_ex1rb"]
 [ext_resource type="Script" path="res://slime.gd" id="4_fdmb7"]
-[ext_resource type="Texture2D" uid="uid://mthqssrhurr3" path="res://assets/kenney_1-bit-pack/Tilesheet/colored-transparent.png" id="6_7a63l"]
-[ext_resource type="Script" path="res://trap.gd" id="6_lewpr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ujpuv"]
 size = Vector2(9.25, 3)
@@ -566,9 +564,6 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_dabip"]
 radius = 82.2515
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_x3yp1"]
-size = Vector2(14, 14)
-
 [node name="root" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_ulil3")
@@ -629,18 +624,3 @@ speed_scale = 1.5
 [node name="VueDuSlime" type="CollisionShape2D" parent="slime"]
 shape = SubResource("CircleShape2D_dabip")
 disabled = true
-
-[node name="trap" type="StaticBody2D" parent="."]
-position = Vector2(507, 114)
-scale = Vector2(4, 4)
-script = ExtResource("6_lewpr")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="trap"]
-position = Vector2(-32, 30.75)
-shape = SubResource("RectangleShape2D_x3yp1")
-
-[node name="Sprite2D" type="Sprite2D" parent="trap"]
-position = Vector2(-32, 30.5)
-texture = ExtResource("6_7a63l")
-region_enabled = true
-region_rect = Rect2(34.4344, 253.906, 15.0099, 17.9065)
