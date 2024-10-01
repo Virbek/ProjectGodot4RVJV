@@ -4,6 +4,7 @@ extends CharacterBody2D
 @onready var explose_range: CollisionShape2D = $ExploseRange
 @onready var slime_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var camera_shake: Node2D = $"../player/Camera2D/camera_shake"
+@onready var explosion_sound: AudioStreamPlayer2D = $explosion_sound
 
 var isExplosing: bool = false
 var timer := Timer.new()
@@ -65,6 +66,7 @@ func startExplose() -> void:
 func badaboum() -> void :
 	if(PlayerIsInExploseRange()):
 		player.takedamage(5)
+	explosion_sound.play()
 	camera_shake.shake()
 	slime_sprite.play("explose")
 	add_child(timer_boum)
