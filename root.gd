@@ -56,12 +56,28 @@ func _physics_process(_dt: float) -> void:
 	sprite.flip_h = flip_x
 	
 	# movements slime
-	
-	var iv_slime = Vector2(player.position.x - slime.position.x,player.position.y - slime.position.y).normalized()
-	if slime.isSeeingPlayer():
-		direction_slime = iv_slime
-		slime.velocity = iv_slime * SPEED/2
-		slime.move_and_slide()
+	if(slime != null):
+		if(slime.PlayerIsInExploseRange() && !slime.isExplosing):
+			slime.startExplose()
+						
+		var iv_slime = Vector2(player.position.x - slime.position.x,player.position.y - slime.position.y).normalized()
+		if slime.isSeeingPlayer():
+			direction_slime = iv_slime
+			slime.velocity = iv_slime * SPEED/2
+			slime.move_and_slide()
+			
+		# animation
+		var base_anim_slime = "idle_" if !slime.isSeeingPlayer() else "move_"
+		var flip_x_slime = false
+		if direction_slime.y > 0.7:
+			anim_direction_slime = "down"
+		elif direction_slime.y < -0.7:
+			anim_direction_slime = "up"
+		elif direction_slime.x < -0.7:
+			anim_direction_slime = "right"
+			flip_x_slime = true
+		elif direction_slime.x > 0.7:
+			anim_direction_slime = "right"
 		
 	# animation
 	var base_anim_slime = "idle_" if !slime.isSeeingPlayer() else "move_"
@@ -76,7 +92,7 @@ func _physics_process(_dt: float) -> void:
 	elif direction_slime.x > 0.7:
 		anim_direction_slime = "right"
 	
-	var animation_name_slime = base_anim_slime + anim_direction_slime
-	sprite_slime.play(animation_name_slime)
-	sprite_slime.flip_h = flip_x_slime
-	
+		var animation_name_slime = base_anim_slime + anim_direction_slime
+		if(!slime.isExplosing):
+			sprite_slime.play(animation_name_slime)
+		sprite_slime.flip_h = flip_x_slime
