@@ -5,7 +5,3 @@ extends CharacterBody2D
 func _ready() -> void:
 	pass # Replace with function body.
 	
-
-func takedamage(damage:int) -> void:
-	print(str(damage) + " dégats reçus")
-	pass

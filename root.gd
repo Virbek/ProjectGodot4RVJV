@@ -5,6 +5,7 @@ extends Node2D
 
 @onready var slime: CharacterBody2D = %slime
 @onready var sprite_slime: AnimatedSprite2D = $slime/AnimatedSprite2D
+@onready var health_system: Node2D = $HealthSystem
 
 
 const SPEED = 300 # px per second
@@ -23,6 +24,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_dt: float) -> void:
+	_render_hud()
 	# movements player
 	var ix = Input.get_axis("player_left", "player_right")
 	var iy = Input.get_axis("player_up", "player_down")
@@ -76,3 +78,8 @@ func _physics_process(_dt: float) -> void:
 		if(!slime.isExplosing):
 			sprite_slime.play(animation_name_slime)
 		sprite_slime.flip_h = flip_x_slime
+		
+func _render_hud():
+	var v = health_system.player_health
+	%health_bar.value = v
+	%health_text.text = "%d/100" % v

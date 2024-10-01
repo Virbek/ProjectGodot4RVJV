@@ -1,4 +1,5 @@
 extends CharacterBody2D
+
 @onready var vue_du_slime: CollisionShape2D = $VueDuSlime
 @onready var player: CharacterBody2D = %player
 @onready var explose_range: CollisionShape2D = $ExploseRange
@@ -65,7 +66,7 @@ func startExplose() -> void:
 
 func badaboum() -> void :
 	if(PlayerIsInExploseRange()):
-		player.takedamage(5)
+		EventBus.player_was_hit.emit(30)
 	explosion_sound.play()
 	camera_shake.shake()
 	slime_sprite.play("explose")
