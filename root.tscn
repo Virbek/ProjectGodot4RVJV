@@ -1,4 +1,4 @@
-[gd_scene load_steps=94 format=3 uid="uid://dhk160xc837ki"]
+[gd_scene load_steps=98 format=3 uid="uid://dhk160xc837ki"]
 
 [ext_resource type="Texture2D" uid="uid://draivv5jqmk0r" path="res://assets/mystic_woods_free_2.2/sprites/characters/player.png" id="1_84f7y"]
 [ext_resource type="Script" path="res://root.gd" id="1_ulil3"]
@@ -7,10 +7,11 @@
 [ext_resource type="Texture2D" uid="uid://b1spsq2veqrk4" path="res://assets/mystic_woods_free_2.2/sprites/objects/objects.png" id="3_sijcb"]
 [ext_resource type="Texture2D" uid="uid://d2vnafkuhy1ny" path="res://assets/mystic_woods_free_2.2/sprites/characters/slime.png" id="4_ex1rb"]
 [ext_resource type="Script" path="res://slime.gd" id="4_fdmb7"]
+[ext_resource type="Texture2D" uid="uid://7ltrsk7aqbpg" path="res://assets/explosion_slime.png" id="5_r7a5m"]
 [ext_resource type="Texture2D" uid="uid://mthqssrhurr3" path="res://assets/kenney_1-bit-pack/Tilesheet/colored-transparent.png" id="6_7a63l"]
 [ext_resource type="Script" path="res://trap.gd" id="6_lewpr"]
-[ext_resource type="Texture2D" uid="uid://7ltrsk7aqbpg" path="res://assets/explosion_slime.png" id="5_r7a5m"]
 [ext_resource type="AudioStream" uid="uid://y4wyqgpr5vq2" path="res://assets/sounds/explosion.wav" id="9_o1dfh"]
+[ext_resource type="AudioStream" uid="uid://drbk110d4l6c5" path="res://bear_trap.wav" id="12_udwio"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ujpuv"]
 size = Vector2(9.25, 3)
@@ -636,13 +637,14 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_dabip"]
 radius = 82.2515
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_x3yp1"]
-size = Vector2(14, 14)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ulble"]
 size = Vector2(16, 5)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_f6urc"]
 radius = 32.1908
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x3yp1"]
+size = Vector2(10.75, 10.25)
 
 [node name="root" type="Node2D"]
 y_sort_enabled = true
@@ -704,27 +706,13 @@ script = ExtResource("4_fdmb7")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="slime"]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_v6kc6")
-animation = &"explose"
+animation = &"idle_down"
 speed_scale = 1.5
 
 [node name="VueDuSlime" type="CollisionShape2D" parent="slime"]
 shape = SubResource("CircleShape2D_dabip")
 disabled = true
 
-[node name="trap" type="StaticBody2D" parent="."]
-position = Vector2(507, 114)
-scale = Vector2(4, 4)
-script = ExtResource("6_lewpr")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="trap"]
-position = Vector2(-32, 30.75)
-shape = SubResource("RectangleShape2D_x3yp1")
-
-[node name="Sprite2D" type="Sprite2D" parent="trap"]
-position = Vector2(-32, 30.5)
-texture = ExtResource("6_7a63l")
-region_enabled = true
-region_rect = Rect2(34.4344, 253.906, 15.0099, 17.9065)
 [node name="shape_body" type="CollisionShape2D" parent="slime"]
 position = Vector2(-0.25, 5.5)
 shape = SubResource("RectangleShape2D_ulble")
@@ -735,3 +723,22 @@ disabled = true
 
 [node name="explosion_sound" type="AudioStreamPlayer2D" parent="slime"]
 stream = ExtResource("9_o1dfh")
+
+[node name="trap" type="Area2D" parent="."]
+position = Vector2(507, 114)
+scale = Vector2(4, 4)
+script = ExtResource("6_lewpr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="trap"]
+position = Vector2(-31.875, 30.625)
+shape = SubResource("RectangleShape2D_x3yp1")
+
+[node name="Sprite2D" type="Sprite2D" parent="trap"]
+position = Vector2(-32, 30.5)
+texture = ExtResource("6_7a63l")
+region_enabled = true
+region_rect = Rect2(34.4344, 253.906, 15.0099, 17.9065)
+
+[node name="trap_sound" type="AudioStreamPlayer2D" parent="trap"]
+position = Vector2(-32.25, 31.75)
+stream = ExtResource("12_udwio")
