@@ -11,7 +11,6 @@ var timer := Timer.new()
 var timer_boum := Timer.new()
 
 
-
 func isSeeingPlayer() -> bool:
 	if vue_du_slime.shape is CircleShape2D and player:
 		var player_global_pos = player.global_position
