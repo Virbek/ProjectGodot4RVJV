@@ -8,14 +8,11 @@
 [ext_resource type="FontFile" uid="uid://dycixxsrasapt" path="res://Retro Gaming.ttf" id="5_bxe1w"]
 [ext_resource type="Texture2D" uid="uid://mthqssrhurr3" path="res://assets/kenney_1-bit-pack/Tilesheet/colored-transparent.png" id="6_7a63l"]
 [ext_resource type="Script" path="res://trap.gd" id="6_lewpr"]
-[ext_resource type="PackedScene" uid="uid://edleiq2h61n1" path="res://slime.tscn" id="7_2t8m1"]
+[ext_resource type="PackedScene" path="res://slime.tscn" id="7_2t8m1"]
 [ext_resource type="Script" path="res://skelette.gd" id="10_vlt3l"]
 [ext_resource type="Script" path="res://health_system.gd" id="10_xgdao"]
 [ext_resource type="Texture2D" uid="uid://b5vlfpbxirt1v" path="res://assets/skel.png" id="11_bdnh4"]
 [ext_resource type="AudioStream" uid="uid://drbk110d4l6c5" path="res://bear_trap.wav" id="12_udwio"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ujpuv"]
-size = Vector2(9.25, 3)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_coeq4"]
 atlas = ExtResource("1_84f7y")
@@ -302,6 +299,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ujpuv"]
+size = Vector2(9.25, 3)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t8y62"]
 size = Vector2(12, 9)
 
@@ -363,10 +363,6 @@ scale = Vector2(0.25, 0.25)
 [node name="camera_shake" type="Node2D" parent="player/Camera2D"]
 script = ExtResource("2_g2na3")
 
-[node name="shape_body" type="CollisionShape2D" parent="player"]
-position = Vector2(1.375, 2)
-shape = SubResource("RectangleShape2D_ujpuv")
-
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="player"]
 position = Vector2(1, 3.25)
 sprite_frames = SubResource("SpriteFrames_vp101")
@@ -384,6 +380,12 @@ theme_override_fonts/font = ExtResource("5_bxe1w")
 theme_override_font_sizes/font_size = 11
 text = "2"
 horizontal_alignment = 1
+
+[node name="Area2D" type="Area2D" parent="player" groups=["Player"]]
+
+[node name="shape_body" type="CollisionShape2D" parent="player/Area2D"]
+position = Vector2(1.375, 2)
+shape = SubResource("RectangleShape2D_ujpuv")
 
 [node name="rock" type="StaticBody2D" parent="."]
 position = Vector2(507, 114)
@@ -479,3 +481,5 @@ position = Vector2(636, 384)
 
 [node name="slime" parent="." instance=ExtResource("7_2t8m1")]
 position = Vector2(833, 365)
+
+[connection signal="area_entered" from="player/Area2D" to="player" method="_on_area_2d_area_entered"]
