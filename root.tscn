@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://dhk160xc837ki"]
+[gd_scene load_steps=58 format=3 uid="uid://dhk160xc837ki"]
 
 [ext_resource type="Texture2D" uid="uid://draivv5jqmk0r" path="res://assets/mystic_woods_free_2.2/sprites/characters/player.png" id="1_84f7y"]
 [ext_resource type="Script" path="res://root.gd" id="1_ulil3"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://camera_shake.gd" id="2_g2na3"]
 [ext_resource type="Texture2D" uid="uid://b1spsq2veqrk4" path="res://assets/mystic_woods_free_2.2/sprites/objects/objects.png" id="3_sijcb"]
 [ext_resource type="FontFile" uid="uid://dycixxsrasapt" path="res://Retro Gaming.ttf" id="5_bxe1w"]
+[ext_resource type="AudioStream" uid="uid://dmip241yvj6id" path="res://assets/sounds/retro-hurt-2-236675.mp3" id="6_rv3dj"]
 [ext_resource type="PackedScene" path="res://slime.tscn" id="7_2t8m1"]
 [ext_resource type="PackedScene" path="res://trap.tscn" id="7_ilg4v"]
 [ext_resource type="Script" path="res://skelette.gd" id="10_vlt3l"]
@@ -385,6 +386,9 @@ shape = SubResource("RectangleShape2D_ujpuv")
 [node name="shape_body" type="CollisionShape2D" parent="player"]
 position = Vector2(1.375, 2)
 shape = SubResource("RectangleShape2D_ujpuv")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="player"]
+stream = ExtResource("6_rv3dj")
 
 [node name="rock" type="StaticBody2D" parent="."]
 position = Vector2(507, 114)
