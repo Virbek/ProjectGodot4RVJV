@@ -28,7 +28,7 @@ func _ready() -> void:
 		#sprite.material.set_shader_property("force", 1)
 		var mat:ShaderMaterial = sprite_hit.material
 		mat.set_shader_parameter("force", 1)
-		tween_to_value(0., 3.5)
+		tween_to_value(0., .2)
 	)
 	
 	EventBus.player_died.connect(func():
