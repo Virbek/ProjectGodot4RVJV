@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=3 uid="uid://dhk160xc837ki"]
+[gd_scene load_steps=62 format=3 uid="uid://dhk160xc837ki"]
 
 [ext_resource type="Texture2D" uid="uid://draivv5jqmk0r" path="res://assets/mystic_woods_free_2.2/sprites/characters/player.png" id="1_84f7y"]
 [ext_resource type="Script" path="res://root.gd" id="1_ulil3"]
@@ -9,13 +9,12 @@
 [ext_resource type="Texture2D" uid="uid://q1jyx73ohwdu" path="res://assets/white.png" id="5_6veem"]
 [ext_resource type="FontFile" uid="uid://dycixxsrasapt" path="res://Retro Gaming.ttf" id="5_bxe1w"]
 [ext_resource type="Script" path="res://masque_blessure.gd" id="6_5fipv"]
-[ext_resource type="Texture2D" uid="uid://mthqssrhurr3" path="res://assets/kenney_1-bit-pack/Tilesheet/colored-transparent.png" id="6_7a63l"]
-[ext_resource type="Script" path="res://trap.gd" id="6_lewpr"]
+[ext_resource type="AudioStream" uid="uid://dmip241yvj6id" path="res://assets/sounds/retro-hurt-2-236675.mp3" id="6_rv3dj"]
 [ext_resource type="PackedScene" uid="uid://edleiq2h61n1" path="res://slime.tscn" id="7_2t8m1"]
+[ext_resource type="PackedScene" path="res://trap.tscn" id="7_ilg4v"]
 [ext_resource type="Script" path="res://skelette.gd" id="10_vlt3l"]
 [ext_resource type="Script" path="res://health_system.gd" id="10_xgdao"]
 [ext_resource type="Texture2D" uid="uid://b5vlfpbxirt1v" path="res://assets/skel.png" id="11_bdnh4"]
-[ext_resource type="AudioStream" uid="uid://drbk110d4l6c5" path="res://bear_trap.wav" id="12_udwio"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_j47ta"]
 shader = ExtResource("4_oek74")
@@ -23,13 +22,6 @@ shader_parameter/force = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ujpuv"]
 size = Vector2(9.25, 3)
-
-[ext_resource type="AudioStream" uid="uid://dmip241yvj6id" path="res://assets/sounds/retro-hurt-2-236675.mp3" id="6_rv3dj"]
-[ext_resource type="PackedScene" path="res://slime.tscn" id="7_2t8m1"]
-[ext_resource type="PackedScene" path="res://trap.tscn" id="7_ilg4v"]
-[ext_resource type="Script" path="res://skelette.gd" id="10_vlt3l"]
-[ext_resource type="Script" path="res://health_system.gd" id="10_xgdao"]
-[ext_resource type="Texture2D" uid="uid://b5vlfpbxirt1v" path="res://assets/skel.png" id="11_bdnh4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_coeq4"]
 atlas = ExtResource("1_84f7y")
@@ -316,9 +308,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ujpuv"]
-size = Vector2(9.25, 3)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t8y62"]
 size = Vector2(12, 9)
 
@@ -410,7 +399,7 @@ horizontal_alignment = 1
 position = Vector2(1.375, 2)
 shape = SubResource("RectangleShape2D_ujpuv")
 
-[node name="shape_body" type="CollisionShape2D" parent="player"]
+[node name="shape_body2" type="CollisionShape2D" parent="player"]
 position = Vector2(1.375, 2)
 shape = SubResource("RectangleShape2D_ujpuv")
 
