@@ -1,24 +1,12 @@
-[gd_resource type="VisualShader" load_steps=7 format=3 uid="uid://bvkq3bnrovr7h"]
+[gd_resource type="VisualShader" load_steps=3 format=3 uid="uid://bvkq3bnrovr7h"]
 
 [sub_resource type="VisualShaderNodeVec3Constant" id="VisualShaderNodeVec3Constant_1ow7h"]
 constant = Vector3(1, 0, 0)
-
-[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_rgsct"]
-input_name = "time"
-
-[sub_resource type="VisualShaderNodeFloatFunc" id="VisualShaderNodeFloatFunc_sbia7"]
-function = 0
-
-[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_76eql"]
-input_name = "color"
 
 [sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_4xbrb"]
 parameter_name = "force"
 hint = 1
 default_value_enabled = true
-
-[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_sawbk"]
-input_name = "fragcoord"
 
 [resource]
 code = "shader_type canvas_item;
@@ -44,19 +32,12 @@ void fragment() {
 
 }
 "
+graph_offset = Vector2(114.057, -30.7023)
 mode = 1
 flags/light_only = false
-nodes/fragment/0/position = Vector2(1500, 320)
+nodes/fragment/0/position = Vector2(1620, 200)
 nodes/fragment/3/node = SubResource("VisualShaderNodeVec3Constant_1ow7h")
 nodes/fragment/3/position = Vector2(720, 80)
-nodes/fragment/5/node = SubResource("VisualShaderNodeInput_rgsct")
-nodes/fragment/5/position = Vector2(-300, 480)
-nodes/fragment/6/node = SubResource("VisualShaderNodeFloatFunc_sbia7")
-nodes/fragment/6/position = Vector2(540, 440)
-nodes/fragment/7/node = SubResource("VisualShaderNodeInput_76eql")
-nodes/fragment/7/position = Vector2(-940, 860)
 nodes/fragment/8/node = SubResource("VisualShaderNodeFloatParameter_4xbrb")
-nodes/fragment/8/position = Vector2(-60, 720)
-nodes/fragment/9/node = SubResource("VisualShaderNodeInput_sawbk")
-nodes/fragment/9/position = Vector2(-320, 120)
-nodes/fragment/connections = PackedInt32Array(3, 0, 0, 0, 5, 0, 6, 0, 8, 0, 0, 1)
+nodes/fragment/8/position = Vector2(840, 340)
+nodes/fragment/connections = PackedInt32Array(3, 0, 0, 0, 8, 0, 0, 1)

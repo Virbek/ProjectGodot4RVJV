@@ -12,6 +12,8 @@ var direction: Vector2
 var anim_direction: String = "down"
 var direction_slime: Vector2 = Vector2.ZERO
 var anim_direction_slime: String = "down"
+var flip_x = false
+
 
 # Variable pour l'immobilisation
 var is_immobilized: bool = false
@@ -40,7 +42,6 @@ func _physics_process(_dt: float) -> void:
 	
 		# animation du joueur
 		var base_anim = "idle_" if direction.length() < .1 else "move_"
-		var flip_x = false
 		if direction.y > 0:
 			anim_direction = "down"
 		elif direction.y < 0:
@@ -50,6 +51,7 @@ func _physics_process(_dt: float) -> void:
 			flip_x = true
 		elif direction.x > 0:
 			anim_direction = "right"
+			flip_x = false
 	
 		var animation_name = base_anim + anim_direction
 		sprite.play(animation_name)
