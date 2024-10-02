@@ -387,6 +387,10 @@ horizontal_alignment = 1
 position = Vector2(1.375, 2)
 shape = SubResource("RectangleShape2D_ujpuv")
 
+[node name="shape_body" type="CollisionShape2D" parent="player"]
+position = Vector2(1.375, 2)
+shape = SubResource("RectangleShape2D_ujpuv")
+
 [node name="rock" type="StaticBody2D" parent="."]
 position = Vector2(507, 114)
 scale = Vector2(4, 4)
