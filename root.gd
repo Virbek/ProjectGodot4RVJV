@@ -13,8 +13,6 @@ var direction: Vector2
 var anim_direction: String = "down"
 var direction_slime: Vector2 = Vector2.ZERO
 var anim_direction_slime: String = "down"
-const largeur = 1000
-const hauteur = 1000
 
 # Variable pour l'immobilisation
 var is_immobilized: bool = false
@@ -76,8 +74,10 @@ func SpawnPoteau() -> void:
 	var instance = prefab_scene.instantiate()
 	add_child(instance)
 	var rng = RandomNumberGenerator.new()
-	var rndX = rng.randi_range(0, largeur)
-	var rndY = rng.randi_range(0, hauteur)
+	var largeur =  player.position.x + (1280/2)
+	var hauteur = player.position.y + (720/2)
+	var rndX = rng.randi_range(player.position.x - (1280/2), largeur)
+	var rndY = rng.randi_range(player.position.y - (720/2), hauteur)
 	instance.position = Vector2(rndX, rndY)
 	
 	
