@@ -1,33 +1,29 @@
 extends Node2D
-
 @onready var player: CharacterBody2D = $player
 @onready var sprite: AnimatedSprite2D = $player/AnimatedSprite2D
-
 @onready var slime: CharacterBody2D = $slime
 @onready var sprite_slime: AnimatedSprite2D = $slime/AnimatedSprite2D
-
-# Connectez le piège au moment où le script est prêt
 @onready var trap: Area2D = $trap
+@onready var immobilization_label: Label = $player/immobilization_timer
 
 const SPEED = 300 # px per second
 
 var direction: Vector2
 var anim_direction: String = "down"
-
 var direction_slime: Vector2 = Vector2.ZERO
 var anim_direction_slime: String = "down"
 
 # Variable pour l'immobilisation
-var is_immobilized: bool = false  # Indique si le joueur est immobilisé
-var has_played_sound: bool = false  # Indique si le son a déjà été joué
+var is_immobilized: bool = false
+var has_played_sound: bool = false
+var immobilization_time_left: float = 0.0
+var immobilization_duration: float = 2.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	#EventBus.level_started.emit()
 	#EventBus.level_started.connect(func(): pass)
 	player.add_to_group("players")
-	
-	# Connexion du signal "player_immobilized" du piège
 	trap.connect("player_immobilized", Callable(self, "_on_Trap_immobilize_player"))
 
 func _physics_process(_dt: float) -> void:
@@ -80,27 +76,32 @@ func _physics_process(_dt: float) -> void:
 			flip_x_slime = true
 		elif direction_slime.x > 0.7:
 			anim_direction_slime = "right"
+	
+	# Réduire le temps restant
+	immobilization_time_left -= _dt
+	var seconds = floor(immobilization_time_left)
+	var tenths = floor((immobilization_time_left - seconds) * 10)
+	immobilization_label.text = str(seconds) + "." + str(tenths) + "s"
 
 
 # Fonction pour immobiliser le joueur
 func immobilize_player() -> void:
+	immobilization_time_left = immobilization_duration
 	is_immobilized = true
-	player.set_physics_process(false)  # Désactive les mouvements du joueur
-	
-	# Griser le sprite
+	player.set_physics_process(false)
 	sprite.modulate = Color(0.5, 0.5, 0.5)
+	immobilization_label.show()
+	immobilization_label.text = str(immobilization_time_left)
 
 # Fonction pour libérer le joueur après l'immobilisation
 func free_player() -> void:
 	is_immobilized = false
-	player.set_physics_process(true)  # Réactive les mouvements du joueur
-	
-	# Rétablir la couleur d'origine
+	player.set_physics_process(true)
 	sprite.modulate = Color(1, 1, 1)
+	immobilization_label.hide()
 
 # Fonction appelée lorsque le signal est reçu
 func _on_Trap_immobilize_player() -> void:
 	immobilize_player()
-	# Libérer après 2 secondes
-	await get_tree().create_timer(2.0).timeout
+	await get_tree().create_timer(immobilization_duration).timeout
 	free_player()

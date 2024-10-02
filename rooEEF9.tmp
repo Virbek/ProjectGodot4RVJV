@@ -1,5 +1,4 @@
-[gd_scene load_steps=104 format=3 uid="uid://dhk160xc837ki"]
-
+[gd_scene load_steps=105 format=3 uid="uid://dhk160xc837ki"]
 
 [ext_resource type="Texture2D" uid="uid://draivv5jqmk0r" path="res://assets/mystic_woods_free_2.2/sprites/characters/player.png" id="1_84f7y"]
 [ext_resource type="Script" path="res://root.gd" id="1_ulil3"]
@@ -711,11 +710,10 @@ autoplay = "idle_down"
 offset = Vector2(0, -16)
 
 [node name="immobilization_timer" type="Label" parent="player"]
-visible = false
-offset_left = -8.0
-offset_top = -30.0
-offset_right = 2.0
-offset_bottom = -16.0
+offset_left = -3.25
+offset_top = -27.75
+offset_right = 6.75
+offset_bottom = -13.75
 theme_override_fonts/font = ExtResource("5_bxe1w")
 theme_override_font_sizes/font_size = 11
 text = "2"
