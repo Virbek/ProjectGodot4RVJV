@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=5 format=3 uid="uid://dtxj4osm8jeqn"]
+[gd_resource type="TileSet" load_steps=5 format=3 uid="uid://dr05bortx1osj"]
 
 [ext_resource type="Texture2D" uid="uid://jy7a52a54quy" path="res://assets/kenney_1-bit-pack/Tilesheet/colored-transparent_packed.png" id="1_udras"]
 [ext_resource type="PackedScene" uid="uid://xlmn4n6yg1kx" path="res://rock.tscn" id="2_ie0gb"]

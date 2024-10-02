@@ -8,7 +8,7 @@
 [ext_resource type="FontFile" uid="uid://dycixxsrasapt" path="res://Retro Gaming.ttf" id="5_bxe1w"]
 [ext_resource type="Texture2D" uid="uid://mthqssrhurr3" path="res://assets/kenney_1-bit-pack/Tilesheet/colored-transparent.png" id="6_7a63l"]
 [ext_resource type="Script" path="res://trap.gd" id="6_lewpr"]
-[ext_resource type="PackedScene" uid="uid://edleiq2h61n1" path="res://slime.tscn" id="7_2t8m1"]
+[ext_resource type="PackedScene" path="res://slime.tscn" id="7_2t8m1"]
 [ext_resource type="Script" path="res://skelette.gd" id="10_vlt3l"]
 [ext_resource type="Script" path="res://health_system.gd" id="10_xgdao"]
 [ext_resource type="Texture2D" uid="uid://b5vlfpbxirt1v" path="res://assets/skel.png" id="11_bdnh4"]
@@ -346,8 +346,8 @@ script = ExtResource("1_ulil3")
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = -517.0
 offset_top = -417.0
-offset_right = 1940.0
-offset_bottom = 1117.0
+offset_right = 1923.0
+offset_bottom = 1159.0
 color = Color(0.25361, 0.775285, 0.585926, 1)
 
 [node name="player" type="CharacterBody2D" parent="."]
