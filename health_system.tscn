@@ -1,0 +1,49 @@
+[gd_scene load_steps=4 format=3 uid="uid://ddnpyyhvveiis"]
+
+[ext_resource type="Script" path="res://health_system.gd" id="1_2g5sy"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vdjcx"]
+bg_color = Color(1, 0.342538, 0.28335, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hl2b1"]
+bg_color = Color(4.33177e-06, 0.705138, 0.531872, 1)
+
+[node name="HealthSystem" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="fullscreen" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="health_bar" type="ProgressBar" parent="CanvasLayer/fullscreen"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 21.0
+offset_top = 25.0
+offset_right = 356.0
+offset_bottom = 68.0
+theme_override_styles/background = SubResource("StyleBoxFlat_vdjcx")
+theme_override_styles/fill = SubResource("StyleBoxFlat_hl2b1")
+value = 45.0
+show_percentage = false
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/fullscreen/health_bar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="health_text" type="Label" parent="CanvasLayer/fullscreen/health_bar/CenterContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Health: XSXS"
+
+[node name="HealthSystem" type="Node2D" parent="."]
+script = ExtResource("1_2g5sy")

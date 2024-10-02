@@ -5,6 +5,7 @@ extends Node2D
 @onready var sprite_slime: AnimatedSprite2D = $slime/AnimatedSprite2D
 @onready var trap: Area2D = $trap
 @onready var immobilization_label: Label = $player/immobilization_timer
+@onready var health_system: Node2D = $HealthSystem
 
 const SPEED = 300 # px per second
 
@@ -27,6 +28,7 @@ func _ready() -> void:
 	trap.connect("player_immobilized", Callable(self, "_on_Trap_immobilize_player"))
 
 func _physics_process(_dt: float) -> void:
+	_render_hud()
 	if not is_immobilized:
 		# mouvements du joueur
 		var ix = Input.get_axis("player_left", "player_right")
@@ -52,30 +54,6 @@ func _physics_process(_dt: float) -> void:
 		var animation_name = base_anim + anim_direction
 		sprite.play(animation_name)
 		sprite.flip_h = flip_x
-	
-	# mouvements du slime
-	if(slime != null):
-		if(slime.PlayerIsInExploseRange() and not slime.isExplosing):
-			slime.startExplose()
-						
-		var iv_slime = Vector2(player.position.x - slime.position.x,player.position.y - slime.position.y).normalized()
-		if slime.isSeeingPlayer():
-			direction_slime = iv_slime
-			slime.velocity = iv_slime * SPEED/2
-			slime.move_and_slide()
-			
-		# animation du slime
-		var base_anim_slime = "idle_" if not slime.isSeeingPlayer() else "move_"
-		var flip_x_slime = false
-		if direction_slime.y > 0.7:
-			anim_direction_slime = "down"
-		elif direction_slime.y < -0.7:
-			anim_direction_slime = "up"
-		elif direction_slime.x < -0.7:
-			anim_direction_slime = "right"
-			flip_x_slime = true
-		elif direction_slime.x > 0.7:
-			anim_direction_slime = "right"
 	
 	# Réduire le temps restant
 	immobilization_time_left -= _dt
@@ -105,3 +83,8 @@ func _on_Trap_immobilize_player() -> void:
 	immobilize_player()
 	await get_tree().create_timer(immobilization_duration).timeout
 	free_player()
+	
+func _render_hud():
+	var v = health_system.player_health
+	%health_bar.value = v
+	%health_text.text = "%d/100" % v
