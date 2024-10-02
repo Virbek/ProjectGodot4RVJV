@@ -1,10 +1,10 @@
 extends Node2D
-
 @onready var player: CharacterBody2D = $player
 @onready var sprite: AnimatedSprite2D = $player/AnimatedSprite2D
-
 @onready var slime: CharacterBody2D = $slime
 @onready var sprite_slime: AnimatedSprite2D = $slime/AnimatedSprite2D
+@onready var trap: Area2D = $trap
+@onready var immobilization_label: Label = $player/immobilization_timer
 
 # Connectez le piège au moment où le script est prêt
 @onready var trap: StaticBody2D = $trap
@@ -13,16 +13,14 @@ const SPEED = 300  # px per second
 
 var direction: Vector2
 var anim_direction: String = "down"
-
 var direction_slime: Vector2 = Vector2.ZERO
 var anim_direction_slime: String = "down"
 
-# Variables pour l'immobilisation
-var immobilize_delay: float = 3.0  # Le joueur sera immobilisé après 3 secondes
-var immobilize_duration: float = 2.0  # Durée pendant laquelle le joueur est immobilisé
-var timer: float = 0.0  # Compteur de temps pour déclencher l'immobilisation
-var is_immobilized: bool = false  # Indique si le joueur est immobilisé
-var has_been_immobilized: bool = false  # Indique si le joueur a déjà été immobilisé
+# Variable pour l'immobilisation
+var is_immobilized: bool = false
+var has_played_sound: bool = false
+var immobilization_time_left: float = 0.0
+var immobilization_duration: float = 2.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -44,34 +42,35 @@ func _process(delta: float) -> void:
 			free_player()
 
 func _physics_process(_dt: float) -> void:
-	# movements player
-	var ix = Input.get_axis("player_left", "player_right")
-	var iy = Input.get_axis("player_up", "player_down")
-	var iv = Vector2(ix, iy).normalized()
-	direction = iv
-	player.velocity = iv * SPEED
-	player.move_and_slide()
+	if not is_immobilized:
+		# mouvements du joueur
+		var ix = Input.get_axis("player_left", "player_right")
+		var iy = Input.get_axis("player_up", "player_down")
+		var iv = Vector2(ix, iy).normalized()
+		direction = iv
+		player.velocity = iv * SPEED
+		player.move_and_slide()
 	
-	# animation
-	var base_anim = "idle_" if direction.length() < .1 else "move_"
-	var flip_x = false
-	if direction.y > 0:
-		anim_direction = "down"
-	elif direction.y < 0:
-		anim_direction = "up"
-	elif direction.x < 0:
-		anim_direction = "right"
-		flip_x = true
-	elif direction.x > 0:
-		anim_direction = "right"
+		# animation du joueur
+		var base_anim = "idle_" if direction.length() < .1 else "move_"
+		var flip_x = false
+		if direction.y > 0:
+			anim_direction = "down"
+		elif direction.y < 0:
+			anim_direction = "up"
+		elif direction.x < 0:
+			anim_direction = "right"
+			flip_x = true
+		elif direction.x > 0:
+			anim_direction = "right"
 	
-	var animation_name = base_anim + anim_direction
-	sprite.play(animation_name)
-	sprite.flip_h = flip_x
+		var animation_name = base_anim + anim_direction
+		sprite.play(animation_name)
+		sprite.flip_h = flip_x
 	
-	# movements slime
+	# mouvements du slime
 	if(slime != null):
-		if(slime.PlayerIsInExploseRange() && !slime.isExplosing):
+		if(slime.PlayerIsInExploseRange() and not slime.isExplosing):
 			slime.startExplose()
 			
 		var iv_slime = Vector2(player.position.x - slime.position.x,player.position.y - slime.position.y).normalized()
@@ -80,8 +79,8 @@ func _physics_process(_dt: float) -> void:
 			slime.velocity = iv_slime * SPEED/2
 			slime.move_and_slide()
 			
-		# animation
-		var base_anim_slime = "idle_" if !slime.isSeeingPlayer() else "move_"
+		# animation du slime
+		var base_anim_slime = "idle_" if not slime.isSeeingPlayer() else "move_"
 		var flip_x_slime = false
 		if direction_slime.y > 0.7:
 			anim_direction_slime = "down"
@@ -92,17 +91,22 @@ func _physics_process(_dt: float) -> void:
 			flip_x_slime = true
 		elif direction_slime.x > 0.7:
 			anim_direction_slime = "right"
+	
+	# Réduire le temps restant
+	immobilization_time_left -= _dt
+	var seconds = floor(immobilization_time_left)
+	var tenths = floor((immobilization_time_left - seconds) * 10)
+	immobilization_label.text = str(seconds) + "." + str(tenths) + "s"
 
 
 # Fonction pour immobiliser le joueur
 func immobilize_player() -> void:
+	immobilization_time_left = immobilization_duration
 	is_immobilized = true
-	player.set_physics_process(false)  # Désactive les mouvements du joueur
-	has_been_immobilized = true  # Indique que le joueur a été immobilisé
-	print("Le joueur est immobilisé !")
-	
-	# Griser le sprite
+	player.set_physics_process(false)
 	sprite.modulate = Color(0.5, 0.5, 0.5)
+	immobilization_label.show()
+	immobilization_label.text = str(immobilization_time_left)
 
 # Fonction pour libérer le joueur après l'immobilisation
 func free_player() -> void:

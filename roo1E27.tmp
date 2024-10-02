@@ -1,6 +1,5 @@
 [gd_scene load_steps=104 format=3 uid="uid://dhk160xc837ki"]
 
-
 [ext_resource type="Texture2D" uid="uid://draivv5jqmk0r" path="res://assets/mystic_woods_free_2.2/sprites/characters/player.png" id="1_84f7y"]
 [ext_resource type="Script" path="res://root.gd" id="1_ulil3"]
 [ext_resource type="Script" path="res://player.gd" id="2_ak8qt"]
@@ -8,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://b1spsq2veqrk4" path="res://assets/mystic_woods_free_2.2/sprites/objects/objects.png" id="3_sijcb"]
 [ext_resource type="Texture2D" uid="uid://d2vnafkuhy1ny" path="res://assets/mystic_woods_free_2.2/sprites/characters/slime.png" id="4_ex1rb"]
 [ext_resource type="Script" path="res://slime.gd" id="4_fdmb7"]
-[ext_resource type="FontFile" uid="uid://dycixxsrasapt" path="res://Retro Gaming.ttf" id="5_bxe1w"]
 [ext_resource type="Texture2D" uid="uid://7ltrsk7aqbpg" path="res://assets/explosion_slime.png" id="5_r7a5m"]
 [ext_resource type="Texture2D" uid="uid://mthqssrhurr3" path="res://assets/kenney_1-bit-pack/Tilesheet/colored-transparent.png" id="6_7a63l"]
 [ext_resource type="Script" path="res://trap.gd" id="6_lewpr"]
@@ -16,6 +14,9 @@
 [ext_resource type="Script" path="res://skelette.gd" id="10_vlt3l"]
 [ext_resource type="Texture2D" uid="uid://b5vlfpbxirt1v" path="res://assets/skel.png" id="11_bdnh4"]
 [ext_resource type="AudioStream" uid="uid://drbk110d4l6c5" path="res://bear_trap.wav" id="12_udwio"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ujpuv"]
+size = Vector2(9.25, 3)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_coeq4"]
 atlas = ExtResource("1_84f7y")
@@ -301,9 +302,6 @@ animations = [{
 "name": &"move_up",
 "speed": 5.0
 }]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ujpuv"]
-size = Vector2(9.25, 3)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t8y62"]
 size = Vector2(12, 9)
@@ -699,23 +697,16 @@ scale = Vector2(0.25, 0.25)
 [node name="camera_shake" type="Node2D" parent="player/Camera2D"]
 script = ExtResource("2_g2na3")
 
+[node name="shape_body" type="CollisionShape2D" parent="player"]
+position = Vector2(1.375, 2)
+shape = SubResource("RectangleShape2D_ujpuv")
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="player"]
 position = Vector2(1, 3.25)
 sprite_frames = SubResource("SpriteFrames_vp101")
 animation = &"idle_down"
 autoplay = "idle_down"
 offset = Vector2(0, -16)
-
-[node name="immobilization_timer" type="Label" parent="player"]
-visible = false
-offset_left = -8.0
-offset_top = -30.0
-offset_right = 2.0
-offset_bottom = -16.0
-theme_override_fonts/font = ExtResource("5_bxe1w")
-theme_override_font_sizes/font_size = 11
-text = "2"
-horizontal_alignment = 1
 
 [node name="rock" type="StaticBody2D" parent="."]
 position = Vector2(507, 114)
@@ -742,7 +733,7 @@ script = ExtResource("4_fdmb7")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="slime"]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_v6kc6")
-animation = &"explose"
+animation = &"idle_down"
 speed_scale = 1.5
 
 [node name="VueDuSlime" type="CollisionShape2D" parent="slime"]
@@ -787,18 +778,16 @@ position = Vector2(-32.25, 31.75)
 stream = ExtResource("12_udwio")
 
 [node name="skelette" type="CharacterBody2D" parent="."]
-unique_name_in_owner = true
 position = Vector2(664, -60)
-scale = Vector2(6, 6)
+scale = Vector2(4, 4)
 collision_layer = 4
 collision_mask = 3
 script = ExtResource("10_vlt3l")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="skelette"]
-position = Vector2(0, 1)
+position = Vector2(0, 4.75)
 shape = SubResource("RectangleShape2D_pxc0d")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="skelette"]
-position = Vector2(0, -3.16667)
 sprite_frames = SubResource("SpriteFrames_1lb7a")
 autoplay = "default"
