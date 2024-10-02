@@ -344,10 +344,10 @@ y_sort_enabled = true
 script = ExtResource("1_ulil3")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-offset_left = 20.0
-offset_top = 8.0
-offset_right = 1136.0
-offset_bottom = 448.0
+offset_left = -517.0
+offset_top = -417.0
+offset_right = 1940.0
+offset_bottom = 1117.0
 color = Color(0.25361, 0.775285, 0.585926, 1)
 
 [node name="player" type="CharacterBody2D" parent="."]
@@ -434,8 +434,6 @@ shape = SubResource("RectangleShape2D_pxc0d")
 sprite_frames = SubResource("SpriteFrames_1lb7a")
 autoplay = "default"
 
-[node name="slime" parent="." instance=ExtResource("7_2t8m1")]
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="fullscreen" type="Control" parent="CanvasLayer"]
@@ -473,3 +471,11 @@ text = "Health: XSXS"
 
 [node name="HealthSystem" type="Node2D" parent="."]
 script = ExtResource("10_xgdao")
+
+[node name="slime2" parent="." instance=ExtResource("7_2t8m1")]
+
+[node name="slime3" parent="." instance=ExtResource("7_2t8m1")]
+position = Vector2(636, 384)
+
+[node name="slime" parent="." instance=ExtResource("7_2t8m1")]
+position = Vector2(833, 365)
