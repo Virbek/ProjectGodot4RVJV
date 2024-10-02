@@ -19,6 +19,7 @@ var is_immobilized: bool = false
 var has_played_sound: bool = false
 var immobilization_time_left: float = 0.0
 var immobilization_duration: float = 2.0
+var spawn = 0.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -60,6 +61,26 @@ func _physics_process(_dt: float) -> void:
 	var seconds = floor(immobilization_time_left)
 	var tenths = floor((immobilization_time_left - seconds) * 10)
 	immobilization_label.text = str(seconds) + "." + str(tenths) + "s"
+	
+	#spawn des poteaux laser
+	
+	spawn += _dt
+	if spawn > 5.0:
+		SpawnPoteau()
+	
+func SpawnPoteau() -> void:
+	spawn = 0
+	var prefab_scene = preload("res://assets/poteau.tscn")
+	var instance = prefab_scene.instantiate()
+	add_child(instance)
+	var rng = RandomNumberGenerator.new()
+	var largeur =  player.position.x + (1280/2)
+	var hauteur = player.position.y + (720/2)
+	var rndX = rng.randi_range(player.position.x - (1280/2), largeur)
+	var rndY = rng.randi_range(player.position.y - (720/2), hauteur)
+	instance.position = Vector2(rndX, rndY)
+	
+	
 
 
 # Fonction pour immobiliser le joueur
