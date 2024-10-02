@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://dhk160xc837ki"]
+[gd_scene load_steps=57 format=3 uid="uid://dhk160xc837ki"]
 
 [ext_resource type="Texture2D" uid="uid://draivv5jqmk0r" path="res://assets/mystic_woods_free_2.2/sprites/characters/player.png" id="1_84f7y"]
 [ext_resource type="Script" path="res://root.gd" id="1_ulil3"]
@@ -6,13 +6,15 @@
 [ext_resource type="Script" path="res://camera_shake.gd" id="2_g2na3"]
 [ext_resource type="Texture2D" uid="uid://b1spsq2veqrk4" path="res://assets/mystic_woods_free_2.2/sprites/objects/objects.png" id="3_sijcb"]
 [ext_resource type="FontFile" uid="uid://dycixxsrasapt" path="res://Retro Gaming.ttf" id="5_bxe1w"]
+[ext_resource type="PackedScene" uid="uid://edleiq2h61n1" path="res://slime.tscn" id="7_2t8m1"]
+[ext_resource type="PackedScene" uid="uid://cov3hek4pgaec" path="res://trap.tscn" id="7_ilg4v"]
 [ext_resource type="Texture2D" uid="uid://mthqssrhurr3" path="res://assets/kenney_1-bit-pack/Tilesheet/colored-transparent.png" id="6_7a63l"]
 [ext_resource type="Script" path="res://trap.gd" id="6_lewpr"]
 [ext_resource type="PackedScene" path="res://slime.tscn" id="7_2t8m1"]
+ 0501a2a41f5796be0480eaad18458f8876d630ca
 [ext_resource type="Script" path="res://skelette.gd" id="10_vlt3l"]
 [ext_resource type="Script" path="res://health_system.gd" id="10_xgdao"]
 [ext_resource type="Texture2D" uid="uid://b5vlfpbxirt1v" path="res://assets/skel.png" id="11_bdnh4"]
-[ext_resource type="AudioStream" uid="uid://drbk110d4l6c5" path="res://bear_trap.wav" id="12_udwio"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_coeq4"]
 atlas = ExtResource("1_84f7y")
@@ -305,9 +307,6 @@ size = Vector2(9.25, 3)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t8y62"]
 size = Vector2(12, 9)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_x3yp1"]
-size = Vector2(10.75, 10.25)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pxc0d"]
 size = Vector2(10, 6.5)
 
@@ -406,24 +405,8 @@ texture = ExtResource("3_sijcb")
 region_enabled = true
 region_rect = Rect2(0, 16, 16, 16)
 
-[node name="trap" type="Area2D" parent="."]
-position = Vector2(507, 114)
-scale = Vector2(4, 4)
-script = ExtResource("6_lewpr")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="trap"]
-position = Vector2(-31.875, 30.625)
-shape = SubResource("RectangleShape2D_x3yp1")
-
-[node name="Sprite2D" type="Sprite2D" parent="trap"]
-position = Vector2(-32, 30.5)
-texture = ExtResource("6_7a63l")
-region_enabled = true
-region_rect = Rect2(34.4344, 253.906, 15.0099, 17.9065)
-
-[node name="trap_sound" type="AudioStreamPlayer2D" parent="trap"]
-position = Vector2(-32.25, 31.75)
-stream = ExtResource("12_udwio")
+[node name="trap2" parent="." groups=["traps"] instance=ExtResource("7_ilg4v")]
+position = Vector2(514.785, 201)
 
 [node name="skelette" type="CharacterBody2D" parent="."]
 position = Vector2(664, -60)
@@ -486,4 +469,11 @@ position = Vector2(636, 384)
 [node name="slime" parent="." instance=ExtResource("7_2t8m1")]
 position = Vector2(833, 365)
 
-[connection signal="area_entered" from="player/Area2D" to="player" method="_on_area_2d_area_entered"]
+[node name="trap" parent="." groups=["traps"] instance=ExtResource("7_ilg4v")]
+position = Vector2(390, 347)
+
+[node name="trap3" parent="." groups=["traps"] instance=ExtResource("7_ilg4v")]
+position = Vector2(1138, 107)
+
+[node name="trap4" parent="." groups=["traps"] instance=ExtResource("7_ilg4v")]
+position = Vector2(610, 420)

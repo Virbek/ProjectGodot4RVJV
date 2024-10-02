@@ -3,7 +3,6 @@ extends Node2D
 @onready var sprite: AnimatedSprite2D = $player/AnimatedSprite2D
 @onready var slime: CharacterBody2D = $slime
 @onready var sprite_slime: AnimatedSprite2D = $slime/AnimatedSprite2D
-@onready var trap: Area2D = $trap
 @onready var immobilization_label: Label = $player/immobilization_timer
 @onready var health_system: Node2D = $HealthSystem
 
@@ -25,8 +24,8 @@ var spawn = 0.0
 func _ready() -> void:
 	#EventBus.level_started.emit()
 	#EventBus.level_started.connect(func(): pass)
-	player.add_to_group("players")
-	trap.connect("player_immobilized", Callable(self, "_on_Trap_immobilize_player"))
+	for trap in get_tree().get_nodes_in_group("traps"):
+		trap.connect("player_immobilized", Callable(self, "_on_Trap_immobilize_player"))
 
 func _physics_process(_dt: float) -> void:
 	_render_hud()
@@ -81,7 +80,6 @@ func SpawnPoteau() -> void:
 	instance.position = Vector2(rndX, rndY)
 	
 	
-
 
 # Fonction pour immobiliser le joueur
 func immobilize_player() -> void:

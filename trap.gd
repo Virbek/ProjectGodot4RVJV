@@ -11,12 +11,11 @@ func _ready() -> void:
 
 # Fonction appelée lorsque le joueur entre dans l'Area2D
 func _on_Trap_body_entered(body: Node) -> void:
-	if body.is_in_group("players") and is_active:
+	if is_active:
 		if trap_sound:
 			trap_sound.play()
 
 		emit_signal("player_immobilized")
-
 		deactivate_trap()
 
 # Fonction pour désactiver le piège
