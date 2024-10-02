@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://brjpf62wj721n"]
+
+[ext_resource type="PackedScene" uid="uid://causqsu2bysvg" path="res://assets/poteau.tscn" id="1_6mgr3"]
+
+[node name="TestPoteau" type="Node2D"]
+
+[node name="Poteau" parent="." instance=ExtResource("1_6mgr3")]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(31.733, 17.7792)

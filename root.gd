@@ -6,7 +6,7 @@ extends Node2D
 @onready var trap: Area2D = $trap
 @onready var immobilization_label: Label = $player/immobilization_timer
 
-const SPEED = 300  # px per second
+const SPEED = 300 # px per second
 
 var direction: Vector2
 var anim_direction: String = "down"
@@ -21,6 +21,8 @@ var immobilization_duration: float = 2.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	#EventBus.level_started.emit()
+	#EventBus.level_started.connect(func(): pass)
 	player.add_to_group("players")
 	trap.connect("player_immobilized", Callable(self, "_on_Trap_immobilize_player"))
 

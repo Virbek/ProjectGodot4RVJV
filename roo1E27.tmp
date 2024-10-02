@@ -1,6 +1,5 @@
 [gd_scene load_steps=104 format=3 uid="uid://dhk160xc837ki"]
 
-
 [ext_resource type="Texture2D" uid="uid://draivv5jqmk0r" path="res://assets/mystic_woods_free_2.2/sprites/characters/player.png" id="1_84f7y"]
 [ext_resource type="Script" path="res://root.gd" id="1_ulil3"]
 [ext_resource type="Script" path="res://player.gd" id="2_ak8qt"]
@@ -8,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://b1spsq2veqrk4" path="res://assets/mystic_woods_free_2.2/sprites/objects/objects.png" id="3_sijcb"]
 [ext_resource type="Texture2D" uid="uid://d2vnafkuhy1ny" path="res://assets/mystic_woods_free_2.2/sprites/characters/slime.png" id="4_ex1rb"]
 [ext_resource type="Script" path="res://slime.gd" id="4_fdmb7"]
-[ext_resource type="FontFile" uid="uid://dycixxsrasapt" path="res://Retro Gaming.ttf" id="5_bxe1w"]
 [ext_resource type="Texture2D" uid="uid://7ltrsk7aqbpg" path="res://assets/explosion_slime.png" id="5_r7a5m"]
 [ext_resource type="Texture2D" uid="uid://mthqssrhurr3" path="res://assets/kenney_1-bit-pack/Tilesheet/colored-transparent.png" id="6_7a63l"]
 [ext_resource type="Script" path="res://trap.gd" id="6_lewpr"]
@@ -710,17 +708,6 @@ animation = &"idle_down"
 autoplay = "idle_down"
 offset = Vector2(0, -16)
 
-[node name="immobilization_timer" type="Label" parent="player"]
-visible = false
-offset_left = -8.0
-offset_top = -30.0
-offset_right = 2.0
-offset_bottom = -16.0
-theme_override_fonts/font = ExtResource("5_bxe1w")
-theme_override_font_sizes/font_size = 11
-text = "2"
-horizontal_alignment = 1
-
 [node name="rock" type="StaticBody2D" parent="."]
 position = Vector2(507, 114)
 scale = Vector2(4, 4)
@@ -746,7 +733,7 @@ script = ExtResource("4_fdmb7")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="slime"]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_v6kc6")
-animation = &"explose"
+animation = &"idle_down"
 speed_scale = 1.5
 
 [node name="VueDuSlime" type="CollisionShape2D" parent="slime"]
