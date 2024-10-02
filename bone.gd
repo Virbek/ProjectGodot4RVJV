@@ -20,4 +20,5 @@ func launch_toward(from: Vector2, where: Vector2) -> void:
 	velocity = (from.direction_to(where) * SPEED)
 	
 func _HandleCollision() -> void:
+	EventBus.player_was_hit.emit(15)
 	queue_free()
