@@ -11,7 +11,6 @@
 [ext_resource type="Texture2D" uid="uid://mthqssrhurr3" path="res://assets/kenney_1-bit-pack/Tilesheet/colored-transparent.png" id="6_7a63l"]
 [ext_resource type="Script" path="res://trap.gd" id="6_lewpr"]
 [ext_resource type="PackedScene" path="res://slime.tscn" id="7_2t8m1"]
- 0501a2a41f5796be0480eaad18458f8876d630ca
 [ext_resource type="Script" path="res://skelette.gd" id="10_vlt3l"]
 [ext_resource type="Script" path="res://health_system.gd" id="10_xgdao"]
 [ext_resource type="Texture2D" uid="uid://b5vlfpbxirt1v" path="res://assets/skel.png" id="11_bdnh4"]
