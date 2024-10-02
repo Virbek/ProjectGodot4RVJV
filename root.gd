@@ -70,6 +70,7 @@ func immobilize_player() -> void:
 	sprite.modulate = Color(0.5, 0.5, 0.5)
 	immobilization_label.show()
 	immobilization_label.text = str(immobilization_time_left)
+	EventBus.player_was_hit.emit(30)
 
 # Fonction pour libérer le joueur après l'immobilisation
 func free_player() -> void:
