@@ -1,4 +1,4 @@
-[gd_scene load_steps=100 format=3 uid="uid://dhk160xc837ki"]
+[gd_scene load_steps=103 format=3 uid="uid://dhk160xc837ki"]
 
 [ext_resource type="Texture2D" uid="uid://draivv5jqmk0r" path="res://assets/mystic_woods_free_2.2/sprites/characters/player.png" id="1_84f7y"]
 [ext_resource type="Script" path="res://root.gd" id="1_ulil3"]
@@ -7,15 +7,12 @@
 [ext_resource type="Texture2D" uid="uid://b1spsq2veqrk4" path="res://assets/mystic_woods_free_2.2/sprites/objects/objects.png" id="3_sijcb"]
 [ext_resource type="Texture2D" uid="uid://d2vnafkuhy1ny" path="res://assets/mystic_woods_free_2.2/sprites/characters/slime.png" id="4_ex1rb"]
 [ext_resource type="Script" path="res://slime.gd" id="4_fdmb7"]
+[ext_resource type="Texture2D" uid="uid://7ltrsk7aqbpg" path="res://assets/explosion_slime.png" id="5_r7a5m"]
 [ext_resource type="Texture2D" uid="uid://mthqssrhurr3" path="res://assets/kenney_1-bit-pack/Tilesheet/colored-transparent.png" id="6_7a63l"]
 [ext_resource type="Script" path="res://trap.gd" id="6_lewpr"]
-[ext_resource type="Texture2D" uid="uid://7ltrsk7aqbpg" path="res://assets/explosion_slime.png" id="5_r7a5m"]
 [ext_resource type="AudioStream" uid="uid://y4wyqgpr5vq2" path="res://assets/sounds/explosion.wav" id="9_o1dfh"]
 [ext_resource type="Script" path="res://skelette.gd" id="10_vlt3l"]
 [ext_resource type="Texture2D" uid="uid://b5vlfpbxirt1v" path="res://assets/skel.png" id="11_bdnh4"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ujpuv"]
-size = Vector2(9.25, 3)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_coeq4"]
 atlas = ExtResource("1_84f7y")
@@ -301,6 +298,9 @@ animations = [{
 "name": &"move_up",
 "speed": 5.0
 }]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ujpuv"]
+size = Vector2(9.25, 3)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t8y62"]
 size = Vector2(12, 9)
@@ -638,13 +638,14 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_dabip"]
 radius = 82.2515
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_x3yp1"]
-size = Vector2(14, 14)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ulble"]
 size = Vector2(16, 5)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_f6urc"]
 radius = 32.1908
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x3yp1"]
+size = Vector2(14, 14)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pxc0d"]
 size = Vector2(10, 6.5)
@@ -695,16 +696,16 @@ scale = Vector2(0.25, 0.25)
 [node name="camera_shake" type="Node2D" parent="player/Camera2D"]
 script = ExtResource("2_g2na3")
 
-[node name="shape_body" type="CollisionShape2D" parent="player"]
-position = Vector2(1.375, 2)
-shape = SubResource("RectangleShape2D_ujpuv")
-
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="player"]
 position = Vector2(1, 3.25)
 sprite_frames = SubResource("SpriteFrames_vp101")
 animation = &"idle_down"
 autoplay = "idle_down"
 offset = Vector2(0, -16)
+
+[node name="shape_body" type="CollisionShape2D" parent="player"]
+position = Vector2(1.375, 2)
+shape = SubResource("RectangleShape2D_ujpuv")
 
 [node name="rock" type="StaticBody2D" parent="."]
 position = Vector2(507, 114)
@@ -738,6 +739,17 @@ speed_scale = 1.5
 shape = SubResource("CircleShape2D_dabip")
 disabled = true
 
+[node name="shape_body" type="CollisionShape2D" parent="slime"]
+position = Vector2(-0.25, 5.5)
+shape = SubResource("RectangleShape2D_ulble")
+
+[node name="ExploseRange" type="CollisionShape2D" parent="slime"]
+shape = SubResource("CircleShape2D_f6urc")
+disabled = true
+
+[node name="explosion_sound" type="AudioStreamPlayer2D" parent="slime"]
+stream = ExtResource("9_o1dfh")
+
 [node name="trap" type="StaticBody2D" parent="."]
 position = Vector2(507, 114)
 scale = Vector2(4, 4)
@@ -752,28 +764,20 @@ position = Vector2(-32, 30.5)
 texture = ExtResource("6_7a63l")
 region_enabled = true
 region_rect = Rect2(34.4344, 253.906, 15.0099, 17.9065)
-[node name="shape_body" type="CollisionShape2D" parent="slime"]
-position = Vector2(-0.25, 5.5)
-shape = SubResource("RectangleShape2D_ulble")
-
-[node name="ExploseRange" type="CollisionShape2D" parent="slime"]
-shape = SubResource("CircleShape2D_f6urc")
-disabled = true
-
-[node name="explosion_sound" type="AudioStreamPlayer2D" parent="slime"]
-stream = ExtResource("9_o1dfh")
 
 [node name="skelette" type="CharacterBody2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(664, -60)
-scale = Vector2(4, 4)
+scale = Vector2(6, 6)
 collision_layer = 4
 collision_mask = 3
 script = ExtResource("10_vlt3l")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="skelette"]
-position = Vector2(0, 4.75)
+position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_pxc0d")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="skelette"]
+position = Vector2(0, -3.16667)
 sprite_frames = SubResource("SpriteFrames_1lb7a")
 autoplay = "default"

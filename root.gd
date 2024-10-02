@@ -7,7 +7,7 @@ extends Node2D
 @onready var sprite_slime: AnimatedSprite2D = $slime/AnimatedSprite2D
 
 # Connectez le piège au moment où le script est prêt
-@onready var trap: StaticBody2D = $Trap
+@onready var trap: StaticBody2D = $trap
 
 const SPEED = 300  # px per second
 
@@ -27,7 +27,7 @@ var has_been_immobilized: bool = false  # Indique si le joueur a déjà été im
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	add_to_group("players")  # Ajoutez le joueur au groupe "players"
-	trap.connect("body_entered", self, "_on_Trap_body_entered")
+	trap.connect("body_entered", _on_Trap_body_entered)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -73,7 +73,7 @@ func _physics_process(_dt: float) -> void:
 	if(slime != null):
 		if(slime.PlayerIsInExploseRange() && !slime.isExplosing):
 			slime.startExplose()
-						
+			
 		var iv_slime = Vector2(player.position.x - slime.position.x,player.position.y - slime.position.y).normalized()
 		if slime.isSeeingPlayer():
 			direction_slime = iv_slime
@@ -120,8 +120,7 @@ func _on_Trap_body_entered(body: Node) -> void:
 	if body.is_in_group("players"):  # Vérifiez si le corps est le joueur
 		immobilize_player()  # Appelez la fonction d'immobilisation
 
-		var animation_name_slime = base_anim_slime + anim_direction_slime
-		if(!slime.isExplosing):
-			sprite_slime.play(animation_name_slime)
-		sprite_slime.flip_h = flip_x_slime
-
+		#var animation_name_slime = base_anim_slime + anim_direction_slime
+		#if(!slime.isExplosing):
+		#	sprite_slime.play(animation_name_slime)
+		#sprite_slime.flip_h = flip_x_slime
