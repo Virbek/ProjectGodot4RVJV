@@ -1,6 +1,6 @@
-[gd_scene load_steps=44 format=3 uid="uid://brjpf62wj721n"]
+[gd_scene load_steps=44 format=3 uid="uid://dwrc4kr432jos"]
 
-[ext_resource type="PackedScene" uid="uid://causqsu2bysvg" path="res://assets/poteau.tscn" id="1_6mgr3"]
+[ext_resource type="PackedScene" uid="uid://bmtvi4c2bycnx" path="res://assets/poteau.tscn" id="1_6mgr3"]
 [ext_resource type="Script" path="res://test_poteau.gd" id="1_owg5q"]
 [ext_resource type="Script" path="res://player.gd" id="2_10kxg"]
 [ext_resource type="Script" path="res://camera_shake.gd" id="3_oqurv"]
