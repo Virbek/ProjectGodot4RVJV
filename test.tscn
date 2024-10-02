@@ -1,35 +1,11 @@
-[gd_scene load_steps=64 format=3 uid="uid://dhk160xc837ki"]
+[gd_scene load_steps=44 format=4 uid="uid://dhk160xc837ki"]
 
 [ext_resource type="Texture2D" uid="uid://draivv5jqmk0r" path="res://assets/mystic_woods_free_2.2/sprites/characters/player.png" id="1_84f7y"]
 [ext_resource type="Script" path="res://root.gd" id="1_ulil3"]
-[ext_resource type="Script" path="res://player.gd" id="2_ak8qt"]
-[ext_resource type="Script" path="res://camera_shake.gd" id="2_g2na3"]
-[ext_resource type="Texture2D" uid="uid://b1spsq2veqrk4" path="res://assets/mystic_woods_free_2.2/sprites/objects/objects.png" id="3_sijcb"]
-[ext_resource type="Shader" uid="uid://bvkq3bnrovr7h" path="res://shaders/cercle_retrecissant.tres" id="4_oek74"]
-[ext_resource type="Texture2D" uid="uid://q1jyx73ohwdu" path="res://assets/white.png" id="5_6veem"]
-[ext_resource type="FontFile" uid="uid://dycixxsrasapt" path="res://Retro Gaming.ttf" id="5_bxe1w"]
-[ext_resource type="Script" path="res://masque_blessure.gd" id="6_5fipv"]
-[ext_resource type="Texture2D" uid="uid://mthqssrhurr3" path="res://assets/kenney_1-bit-pack/Tilesheet/colored-transparent.png" id="6_7a63l"]
-[ext_resource type="Script" path="res://trap.gd" id="6_lewpr"]
-[ext_resource type="PackedScene" uid="uid://edleiq2h61n1" path="res://slime.tscn" id="7_2t8m1"]
-[ext_resource type="Script" path="res://skelette.gd" id="10_vlt3l"]
-[ext_resource type="Script" path="res://health_system.gd" id="10_xgdao"]
-[ext_resource type="Texture2D" uid="uid://b5vlfpbxirt1v" path="res://assets/skel.png" id="11_bdnh4"]
-[ext_resource type="AudioStream" uid="uid://drbk110d4l6c5" path="res://bear_trap.wav" id="12_udwio"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_j47ta"]
-shader = ExtResource("4_oek74")
-shader_parameter/force = 0.0
+[ext_resource type="TileSet" uid="uid://dypl1286bhrbn" path="res://tileset_kenney_1bit.tres" id="4_4pnm1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ujpuv"]
-size = Vector2(9.25, 3)
-
-[ext_resource type="AudioStream" uid="uid://dmip241yvj6id" path="res://assets/sounds/retro-hurt-2-236675.mp3" id="6_rv3dj"]
-[ext_resource type="PackedScene" path="res://slime.tscn" id="7_2t8m1"]
-[ext_resource type="PackedScene" path="res://trap.tscn" id="7_ilg4v"]
-[ext_resource type="Script" path="res://skelette.gd" id="10_vlt3l"]
-[ext_resource type="Script" path="res://health_system.gd" id="10_xgdao"]
-[ext_resource type="Texture2D" uid="uid://b5vlfpbxirt1v" path="res://assets/skel.png" id="11_bdnh4"]
+size = Vector2(14, 9.75)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_coeq4"]
 atlas = ExtResource("1_84f7y")
@@ -316,142 +292,68 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ujpuv"]
-size = Vector2(9.25, 3)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_t8y62"]
-size = Vector2(12, 9)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_pxc0d"]
-size = Vector2(10, 6.5)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1jj8q"]
-atlas = ExtResource("11_bdnh4")
-region = Rect2(0, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4l7cb"]
-atlas = ExtResource("11_bdnh4")
-region = Rect2(16, 0, 16, 16)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_1lb7a"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1jj8q")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_4l7cb")
-}],
-"loop": true,
-"name": &"default",
-"speed": 2.0
-}]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jhyvr"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0sj8d"]
 bg_color = Color(1, 0.342538, 0.28335, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pn56g"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_raoqi"]
 bg_color = Color(4.33177e-06, 0.705138, 0.531872, 1)
 
 [node name="root" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_ulil3")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_left = -517.0
-offset_top = -417.0
-offset_right = 2173.0
-offset_bottom = 1231.0
-color = Color(0.25361, 0.775285, 0.585926, 1)
+[node name="background_dark" type="ColorRect" parent="."]
+offset_left = -3552.0
+offset_top = -1951.0
+offset_right = 4732.0
+offset_bottom = 3000.0
+color = Color(0.278431, 0.176471, 0.235294, 1)
 
-[node name="player" type="CharacterBody2D" parent="."]
+[node name="background_light" type="ColorRect" parent="."]
+offset_left = -3552.0
+offset_top = -1951.0
+offset_right = 4732.0
+offset_bottom = 3000.0
+color = Color(0.81, 0.75573, 0.2673, 1)
+
+[node name="background_tiles" type="TileMapLayer" parent="."]
+y_sort_enabled = true
+scale = Vector2(6, 6)
+tile_map_data = PackedByteArray("AAACAAMAAAADAAAAAAADAAMAAAABAAAAAAADAAIAAAAAAAAAAAAEAAMAAAAAAAAAAAACAAIAAAACAAAAAAABAAMAAAAAAAAAAAAEAAIAAAABAAAAAAAFAAIAAAABAAAAAAAGAAIAAAAEAAAAAAAHAAIAAAABAAAAAAAGAAMAAAACAAAAAAAHAAMAAAABAAAAAAAIAAMAAAACAAAAAAAAAAMAAAACAAAAAAAJAAMAAAAEAAAAAAAGAAQAAAAEAAAAAAAHAAQAAAACAAAAAAAFAAQAAAAEAAAAAAAEAAQAAAACAAAAAAAKAAMAAAACAAAAAAALAAMAAAACAAAAAAALAAQAAAABAAAAAAA=")
+tile_set = ExtResource("4_4pnm1")
+collision_enabled = false
+navigation_enabled = false
+
+[node name="ysort" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="obstacles" type="TileMapLayer" parent="ysort"]
+y_sort_enabled = true
+scale = Vector2(6, 6)
+tile_map_data = PackedByteArray("AAADAAEAAAABAAEAAAAEAAEAAAABAAEAAAACAAEAAAABAAEAAAADAAQAAAABAAEAAAACAAQAAAABAAEAAAAHAAEAAAABAAEAAAAIAAEAAAABAAEAAAAIAAIAAAABAAEAAAAFAAEAAAABAAEAAAAGAAEAAAABAAEAAAACAAUAAAABAAEAAAADAAUAAAABAAEAAAAEAAUAAAABAAEAAAAFAAUAAAABAAEAAAAGAAUAAAABAAEAAAAHAAUAAAABAAEAAAAIAAQAAAABAAEAAAAJAAIAAAABAAEAAAAKAAIAAAABAAEAAAAJAAQAAAABAAEAAAAKAAQAAAABAAEAAAAKAAUAAAABAAEAAAALAAUAAAABAAEAAAAMAAUAAAABAAEAAAAMAAQAAAABAAEAAAAMAAMAAAABAAEAAAAMAAIAAAABAAEAAAALAAIAAAABAAEAAAABAAIAAAABAAEAAAAAAAIAAAABAAEAAAD//wIAAAABAAEAAAD//wMAAAABAAEAAAD//wQAAAABAAEAAAAAAAQAAAABAAEAAAABAAQAAAABAAEAAAAFAAMAAQAAAAAAAQAHAAIAAQAAAAAAAQA=")
+tile_set = ExtResource("4_4pnm1")
+
+[node name="player" type="CharacterBody2D" parent="ysort"]
 unique_name_in_owner = true
-position = Vector2(249, 246)
-scale = Vector2(4, 4)
-collision_mask = 6
-script = ExtResource("2_ak8qt")
+y_sort_enabled = true
+position = Vector2(499, 246)
+collision_mask = 2
 
-[node name="Camera2D" type="Camera2D" parent="player"]
+[node name="Camera2D" type="Camera2D" parent="ysort/player"]
 scale = Vector2(0.25, 0.25)
 
-[node name="camera_shake" type="Node2D" parent="player/Camera2D"]
-script = ExtResource("2_g2na3")
-
-[node name="masque_blessure" type="Sprite2D" parent="player/Camera2D"]
-material = SubResource("ShaderMaterial_j47ta")
-texture = ExtResource("5_6veem")
-script = ExtResource("6_5fipv")
-
-[node name="shape_body" type="CollisionShape2D" parent="player"]
-position = Vector2(1.375, 2)
+[node name="shape_body" type="CollisionShape2D" parent="ysort/player"]
+position = Vector2(0, -5.125)
 shape = SubResource("RectangleShape2D_ujpuv")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="player"]
-position = Vector2(1, 3.25)
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ysort/player"]
+scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_vp101")
-animation = &"idle_down"
+animation = &"move_down"
 autoplay = "idle_down"
 offset = Vector2(0, -16)
 
-[node name="immobilization_timer" type="Label" parent="player"]
-visible = false
-offset_left = -8.0
-offset_top = -30.0
-offset_right = 2.0
-offset_bottom = -16.0
-theme_override_fonts/font = ExtResource("5_bxe1w")
-theme_override_font_sizes/font_size = 11
-text = "2"
-horizontal_alignment = 1
-
-[node name="Area2D" type="Area2D" parent="player" groups=["Player"]]
-
-[node name="shape_body" type="CollisionShape2D" parent="player/Area2D"]
-position = Vector2(1.375, 2)
-shape = SubResource("RectangleShape2D_ujpuv")
-
-[node name="shape_body" type="CollisionShape2D" parent="player"]
-position = Vector2(1.375, 2)
-shape = SubResource("RectangleShape2D_ujpuv")
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="player"]
-stream = ExtResource("6_rv3dj")
-
-[node name="rock" type="StaticBody2D" parent="."]
-position = Vector2(507, 114)
-scale = Vector2(4, 4)
-collision_layer = 2
-collision_mask = 5
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="rock"]
-position = Vector2(0, 2.25)
-shape = SubResource("RectangleShape2D_t8y62")
-
-[node name="sprite" type="Sprite2D" parent="rock"]
-texture = ExtResource("3_sijcb")
-region_enabled = true
-region_rect = Rect2(0, 16, 16, 16)
-
-[node name="trap2" parent="." groups=["traps"] instance=ExtResource("7_ilg4v")]
-position = Vector2(514.785, 201)
-
-[node name="skelette" type="CharacterBody2D" parent="."]
-position = Vector2(664, -60)
-scale = Vector2(4, 4)
-collision_layer = 4
-collision_mask = 3
-script = ExtResource("10_vlt3l")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="skelette"]
-position = Vector2(0, 4.75)
-shape = SubResource("RectangleShape2D_pxc0d")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="skelette"]
-sprite_frames = SubResource("SpriteFrames_1lb7a")
-autoplay = "default"
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-layer = 6
 
 [node name="fullscreen" type="Control" parent="CanvasLayer"]
 layout_mode = 3
@@ -468,8 +370,8 @@ offset_left = 21.0
 offset_top = 25.0
 offset_right = 356.0
 offset_bottom = 68.0
-theme_override_styles/background = SubResource("StyleBoxFlat_jhyvr")
-theme_override_styles/fill = SubResource("StyleBoxFlat_pn56g")
+theme_override_styles/background = SubResource("StyleBoxFlat_0sj8d")
+theme_override_styles/fill = SubResource("StyleBoxFlat_raoqi")
 value = 45.0
 show_percentage = false
 
@@ -485,23 +387,3 @@ grow_vertical = 2
 unique_name_in_owner = true
 layout_mode = 2
 text = "Health: XSXS"
-
-[node name="HealthSystem" type="Node2D" parent="."]
-script = ExtResource("10_xgdao")
-
-[node name="slime2" parent="." instance=ExtResource("7_2t8m1")]
-
-[node name="slime3" parent="." instance=ExtResource("7_2t8m1")]
-position = Vector2(636, 384)
-
-[node name="slime" parent="." instance=ExtResource("7_2t8m1")]
-position = Vector2(833, 365)
-
-[node name="trap" parent="." groups=["traps"] instance=ExtResource("7_ilg4v")]
-position = Vector2(390, 347)
-
-[node name="trap3" parent="." groups=["traps"] instance=ExtResource("7_ilg4v")]
-position = Vector2(1138, 107)
-
-[node name="trap4" parent="." groups=["traps"] instance=ExtResource("7_ilg4v")]
-position = Vector2(610, 420)

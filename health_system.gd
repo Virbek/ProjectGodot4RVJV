@@ -1,15 +1,28 @@
 extends Node
 
 var player_health = 100
+
 var tween: Tween
+
+@onready var animated_sprite_2d: AnimatedSprite2D = $"../player/AnimatedSprite2D"
+var timer := Timer.new()
+@onready var player_hit_audio: AudioStreamPlayer2D = $"../player/AudioStreamPlayer2D"
+
 
 @onready var sprite_hit:Sprite2D = $"../player/Camera2D/masque_blessure"
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	EventBus.player_was_hit.connect(func(dmg: int):
 		print("Damage taken: %d" % dmg)
+		player_hit_audio.play()
 		player_health -= dmg
 		player_health = max(0, player_health)
+		animated_sprite_2d.modulate = Color(1,0,0)
+		add_child(timer)
+		timer.wait_time = 0.4
+		timer.one_shot=false
+		timer.connect("timeout",Callable(self, "anim_degat"))
+		timer.start()
 		if player_health == 0:
 			EventBus.player_died.emit()
 		#sprite.material.set_shader_property("force", 1)
@@ -19,7 +32,7 @@ func _ready() -> void:
 	)
 	
 	EventBus.player_died.connect(func():
-		print("Player died!")
+    get_tree().quit())
 	)
 
 func tween_to_value(value:float, duration:float) -> void:
@@ -34,4 +47,8 @@ func tween_to_value(value:float, duration:float) -> void:
 	await tween.finished
 	print("OK")
 	# Optional: Connect the tween's completed signal to a function
-	#tween.connect("tween_completed", self, "_on_tween_completed")
+	#tween.connect("tween_completed", self, "_on_tween_completed")		
+		
+
+func anim_degat() -> void:
+	animated_sprite_2d.modulate = Color(1,1,1)
