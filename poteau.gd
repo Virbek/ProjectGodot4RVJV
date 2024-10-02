@@ -6,6 +6,7 @@ extends StaticBody2D
 @onready var barre_horizontal_right: ColorRect = $BarreHorizontalRight
 @onready var barre_vertical_up: ColorRect = $BarreVerticalUp
 @onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
+@onready var player: CharacterBody2D = %player
 
 
 
@@ -37,10 +38,10 @@ func _process(delta: float) -> void:
 		barre_vertical_up.visible=true
 		barre_horizontal_right.visible = true
 		barre_horizontalleft.visible = true
-		barre_vertical_down.size.y += 0.1
-		barre_vertical_up.size.y += 1.5
-		barre_horizontal_right.size.x += 1.5
-		barre_horizontalleft.size.x += 0.1
+		barre_vertical_down.scale.y += 10
+		barre_vertical_up.scale.y += 10
+		barre_horizontal_right.scale.x += 1
+		barre_horizontalleft.scale.x += 10
 		#poteau_anim.frame = 0
 		end += delta
 	if end > 1.5:
@@ -55,4 +56,3 @@ func startAnimPoteau() -> void :
 	go = true
 	start = 0.0
 	pass
-	
