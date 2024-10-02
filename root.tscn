@@ -1,5 +1,4 @@
-[gd_scene load_steps=104 format=3 uid="uid://dhk160xc837ki"]
-
+[gd_scene load_steps=105 format=3 uid="uid://dhk160xc837ki"]
 
 [ext_resource type="Texture2D" uid="uid://draivv5jqmk0r" path="res://assets/mystic_woods_free_2.2/sprites/characters/player.png" id="1_84f7y"]
 [ext_resource type="Script" path="res://root.gd" id="1_ulil3"]
@@ -302,8 +301,8 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ujpuv"]
-size = Vector2(9.25, 3)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_07cif"]
+size = Vector2(12.5, 7)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t8y62"]
 size = Vector2(12, 9)
@@ -716,6 +715,10 @@ theme_override_fonts/font = ExtResource("5_bxe1w")
 theme_override_font_sizes/font_size = 11
 text = "2"
 horizontal_alignment = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player"]
+position = Vector2(1.5, 2.5)
+shape = SubResource("RectangleShape2D_07cif")
 
 [node name="rock" type="StaticBody2D" parent="."]
 position = Vector2(507, 114)
