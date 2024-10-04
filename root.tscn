@@ -344,6 +344,7 @@ bg_color = Color(4.33177e-06, 0.705138, 0.531872, 1)
 
 [node name="root" type="Node2D"]
 y_sort_enabled = true
+position = Vector2(-1, 0)
 script = ExtResource("1_ulil3")
 
 [node name="ColorRect" type="ColorRect" parent="."]
